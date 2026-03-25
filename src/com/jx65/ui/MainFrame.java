@@ -32,9 +32,9 @@ public class MainFrame extends JFrame {
     private void FrameInit() {
         //界面初始化
         this.setSize(603, 680);
-        this.setAlwaysOnTop(true);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(3);
+        this.setAlwaysOnTop(true);//界面位于最上层
+        this.setLocationRelativeTo(null);//界面居中
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//关闭模式：关闭任何窗口时结束虚拟机运行
         this.setTitle("拼图游戏V0.1:主界面");
     }
 
