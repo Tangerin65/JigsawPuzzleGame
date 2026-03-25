@@ -1,6 +1,9 @@
 package com.jx65.ui;
 
 import javax.swing.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class MainFrame extends JFrame {
     public MainFrame() {
@@ -21,10 +24,18 @@ public class MainFrame extends JFrame {
 
     private void initImage() {
         int index=1;//图片名称索引
+
+        //打乱图片顺序
+        Integer[]array=new Integer[16];
+        for (int i = 1; i <= 15; i++) {
+            array[i-1]=i;
+        }
+        Collections.shuffle(Arrays.asList(array));
+
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 //图片初始化
-                JLabel img_label=new JLabel(new ImageIcon("Image/EMUs/"+index+".png"));//管理容器直接添加图片对象
+                JLabel img_label=new JLabel(new ImageIcon("Image/EMUs/"+array[index-1]+".png"));//管理容器直接添加图片对象
                 img_label.setBounds(150*j, 150*i, 150, 150);//坐标尺寸设置
                 this.getContentPane().add(img_label);
                 index++;
