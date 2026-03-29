@@ -10,7 +10,7 @@ public class LoginFrame extends JFrame {
         this.setAlwaysOnTop(true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(3);
-        this .setTitle("拼图游戏V0.1:登录");
+        this .setTitle("拼图游戏V0.2:登录");
 
         this.setVisible(true);
     }

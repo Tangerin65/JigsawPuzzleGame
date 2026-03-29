@@ -1,6 +1,7 @@
 package com.jx65.ui;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -36,13 +37,21 @@ public class MainFrame extends JFrame {
             for (int j = 0; j < 4; j++) {
                 //图片初始化
                 JLabel img_label=new JLabel(new ImageIcon("Image/EMUs/"+array[index-1]+".png"));//管理容器直接添加图片对象
-                img_label.setBounds(150*j, 150*i, 150, 150);//坐标尺寸设置
+                img_label.setBounds(150*j+90, 150*i+100, 150, 150);//坐标尺寸设置
+                img_label.setBorder(new BevelBorder(BevelBorder.LOWERED));//边框设置:BevelBorder-凹陷边框
                 this.getContentPane().add(img_label);
                 index++;
             }
         }
 
-
+        //放置背景图片
+        JLabel background=new JLabel(new ImageIcon("Image/background1.png"));
+        background.setBounds(-110, -170, 1000, 1100);
+        this.getContentPane().add(background);
+        // 临时检查：把背景放到最顶层（会覆盖拼图块）
+        //this.getContentPane().setComponentZOrder(background, 0);
+        // 需要恢复到底层时，改回：
+        this.getContentPane().setComponentZOrder(background, this.getContentPane().getComponentCount() - 1);
 
 
 
@@ -70,13 +79,13 @@ public class MainFrame extends JFrame {
 
     private void FrameInit() {
         //界面初始化
-        this.setSize(603, 660);
+        this.setSize(800, 840);
         this.setAlwaysOnTop(true);//界面位于最上层
         this.setLocationRelativeTo(null);//界面居中
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//关闭模式：关闭任何窗口时结束虚拟机运行
         this.setLayout(null);//取消默认布局
         this.setVisible(true);
-        this.setTitle("拼图游戏V0.1:主界面");
+        this.setTitle("拼图游戏V0.2:主界面");
     }
 
 

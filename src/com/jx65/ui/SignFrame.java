@@ -9,7 +9,7 @@ public class SignFrame extends JFrame {
         this.setAlwaysOnTop(true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(3);
-        this.setTitle("拼图游戏V0.1:注册");
+        this.setTitle("拼图游戏V0.2:注册");
 
 
 
