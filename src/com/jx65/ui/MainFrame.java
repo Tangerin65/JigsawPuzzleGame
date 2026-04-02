@@ -112,15 +112,45 @@ public class MainFrame extends JFrame implements KeyListener {
         this.setVisible(true);
         this.setTitle("拼图游戏V0.2:主界面");
     }
-
-    //上移规则实现
-    private boolean moveUpByRule() {
+    //图片移动逻辑：移动空白格子
+    //下移规则实现
+    private boolean moveDownByRule() {
         if (blankY >= 3) {
             return false;
         }
         data[blankY][blankX] = data[blankY + 1][blankX];
         data[blankY + 1][blankX] = null;
         blankY++;
+        return true;
+    }
+    //右移规则实现
+    private boolean moveRightByRule() {
+        if (blankX >= 3) {
+            return false;
+        }
+        data[blankY][blankX] = data[blankY][blankX + 1];
+        data[blankY][blankX + 1] = null;
+        blankX++;
+        return true;
+    }
+    //左移规则实现
+    private boolean moveLeftByRule() {
+        if (blankX <= 0) {
+            return false;
+        }
+        data[blankY][blankX] = data[blankY][blankX - 1];
+        data[blankY][blankX - 1] = null;
+        blankX--;
+        return true;
+    }
+    //上移规则实现
+    private boolean moveUpByRule() {
+        if (blankY <= 0) {
+            return false;
+        }
+        data[blankY][blankX] = data[blankY - 1][blankX];
+        data[blankY - 1][blankX] = null;
+        blankY--;
         return true;
     }
 
@@ -142,22 +172,27 @@ public class MainFrame extends JFrame implements KeyListener {
         switch (code) {
             case 37: // 左移
                 System.out.println("左");
-                // TODO: 添加左移逻辑
+                if (moveLeftByRule()) {
+                    initImage();
+                }
                 break;
             case 38: // 上移
                 System.out.println("上");
                 if (moveUpByRule()) {
                     initImage();
                 }
-
                 break;
             case 39: // 右移
                 System.out.println("右");
-                // TODO: 添加右移逻辑
+                if (moveRightByRule()) {
+                    initImage();
+                }
                 break;
             case 40: // 下移
                 System.out.println("下");
-                // TODO: 添加下移逻辑
+                if (moveDownByRule()) {
+                    initImage();
+                }
                 break;
             default:
                 System.out.println("其他按键: " + code);
