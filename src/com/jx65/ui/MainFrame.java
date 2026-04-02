@@ -28,6 +28,7 @@ public class MainFrame extends JFrame implements KeyListener {
 
         //界面可见
         this.setVisible(true);
+        this.requestFocusInWindow();
 
 
     }
@@ -52,7 +53,7 @@ public class MainFrame extends JFrame implements KeyListener {
     }
 
     private void initImage() {
-        this.getContentPane().removeAll();//图片格子重绘
+        this.getContentPane().removeAll();//图片格子清空
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -63,7 +64,8 @@ public class MainFrame extends JFrame implements KeyListener {
                     img_label = new JLabel();//空白格子：跳过图片填充
                 } else {
                     img_label = new JLabel(new ImageIcon("Image/EMUs/" + nums + ".png"));
-                }                img_label.setBounds(150*j+90, 150*i+100, 150, 150);//坐标尺寸设置
+                }
+                img_label.setBounds(150*j+90, 150*i+100, 150, 150);//坐标尺寸设置
                 img_label.setBorder(new BevelBorder(BevelBorder.LOWERED));//边框设置:BevelBorder-凹陷边框
                 this.getContentPane().add(img_label);//图片应用至区域
             }
@@ -77,8 +79,8 @@ public class MainFrame extends JFrame implements KeyListener {
         //this.getContentPane().setComponentZOrder(background, 0);
         // 需要恢复到底层时，改回：
         this.getContentPane().setComponentZOrder(background, this.getContentPane().getComponentCount() - 1);
-        this.getContentPane().revalidate();
-        this.getContentPane().repaint();
+        this.getContentPane().revalidate();//布局更新，尺寸重新计算
+        this.getContentPane().repaint();//界面重绘
     }
 
     private void getBar() {
@@ -109,7 +111,6 @@ public class MainFrame extends JFrame implements KeyListener {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//关闭模式：关闭任何窗口时结束虚拟机运行
         this.setLayout(null);//取消默认布局
         this.addKeyListener(this);//添加键盘监听事件
-        this.setVisible(true);
         this.setTitle("拼图游戏V0.2:主界面");
     }
     //图片移动逻辑：移动空白格子
@@ -162,6 +163,21 @@ public class MainFrame extends JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        int code=e.getKeyCode();
+        //快捷键A：按下不松查看完整原图
+        if (code == 65) {
+            this.getContentPane().removeAll();
+            JLabel all_image=new JLabel(new ImageIcon("Image/EMUs/full.png"));//原图呈现
+            all_image.setBounds(90, 100, 600, 600);
+            this.getContentPane().add(all_image);
+            //背景图片保持
+            JLabel background=new JLabel(new ImageIcon("Image/background1.png"));
+            background.setBounds(-110, -170, 1000, 1100);
+            this.getContentPane().add(background);
+            this.getContentPane().revalidate();
+            this.getContentPane().repaint();
+            this.requestFocusInWindow();
+        }
 
     }
 
@@ -194,6 +210,11 @@ public class MainFrame extends JFrame implements KeyListener {
                     initImage();
                 }
                 break;
+            case 65://快捷键A松开：原图->拼图界面
+                System.out.println("快捷键A松开");
+                initImage();
+                break;
+
             default:
                 System.out.println("其他按键: " + code);
                 break;
