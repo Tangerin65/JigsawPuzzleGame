@@ -137,7 +137,10 @@ public class MainFrame extends JFrame implements KeyListener, ActionListener {
         reLogin.addActionListener(this);
         exitGame.addActionListener(this);
         producerInfos.addActionListener(this);
-        imgSelect.addActionListener(this);
+        img1_Cities.addActionListener(this);
+        img2_EMUs.addActionListener(this);
+        img3_Hypercars.addActionListener(this);
+
     }
 
     private void FrameInit() {
@@ -332,7 +335,7 @@ public class MainFrame extends JFrame implements KeyListener, ActionListener {
             initImage();
         }
         else if (source == img3_Hypercars) {//图片选择-汽车
-            img_type="Hypercar";
+            img_type="Hypercars";
             initData();
             initImage();
         }
